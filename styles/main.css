@@ -54,6 +54,12 @@ body {
   text-align: center;
 }
 
+.menu li.selected {
+  background: white;
+  border-radius: 5px;
+  color: #222;
+}
+
 .fa {
   background: #FEFEFE;
   color: #2D2D2D;
