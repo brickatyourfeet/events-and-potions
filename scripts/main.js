@@ -3,13 +3,34 @@ var lis = document.querySelectorAll('li')
 for (var i = 0; i < lis.length; i++) {
   var li = lis[i]
   li.addEventListener('click', function (event) {
+    var error = document.querySelector('.alert-danger')
+    if (error) error.remove()
+
     var li = event.target
     if (li.nodeName === 'I') li = li.parentElement
 
-    li.className = 'selected'
+    if (li.className !== 'selected' && items.length > 4) {
+      error = document.createElement('p')
+      error.className = 'alert alert-danger'
+      error.textContent = 'You can only add five items at most!'
 
-    var item = li.textContent.trim()
-    items.push(item)
+      var title = document.getElementById('title')
+      title.after(error)
+
+      return false
+    }
+
+    if (li.className === 'selected') {
+      li.className = ''
+      var text = li.textContent
+      var index = items.indexOf(text)
+      items.splice(index, 1)
+    } else {
+      li.className = 'selected'
+
+      var item = li.textContent.trim()
+      items.push(item)
+    }
 
     var info = document.querySelector('.alert.alert-info span')
     info.textContent = items.join(', ')
@@ -41,13 +62,13 @@ button.addEventListener('click', function () {
   if (items.includes('Morning Dew')) container.style.backgroundColor = 'aqua'
   if (items.includes('Wormwood Essence')) container.style.backgroundColor = 'magenta'
 
-  var container = document.querySelector('body')
-  if (items.includes('Horned slug')) container.style.background = 'red'
-  if (items.includes('Eel Eye')) container.style.background = 'yellow'
-  if (items.includes('Cockroach')) container.style.background = 'green'
-  if (items.includes('Cat Hair')) container.style.background = 'blue'
-  if (items.includes('Crow Feathers')) container.style.background = 'maroon'
-  if (items.includes('Toe of Frog')) container.style.background = 'orange'
+  var body = document.querySelector('body')
+  if (items.includes('Horned slug')) body.style.background = 'red'
+  if (items.includes('Eel Eye')) body.style.background = 'yellow'
+  if (items.includes('Cockroach')) body.style.background = 'green'
+  if (items.includes('Cat Hair')) body.style.background = 'blue'
+  if (items.includes('Crow Feathers')) body.style.background = 'maroon'
+  if (items.includes('Toe of Frog')) body.style.background = 'orange'
 
   items.splice(0, items.length)
 })
