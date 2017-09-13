@@ -2,6 +2,56 @@
 // document.getElementById
 // Find just the title
 var title = document.getElementById('title')
+// what is happening
+var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'purple']
+var clickCounter = 0
+
+title.addEventListener('click', changeTitleColor)
+function changeTitleColor () {
+  console.log(colors[clickCounter], clickCounter)
+  title.style.color = colors[clickCounter]
+  if (colors[clickCounter] === colors[colors.length - 1]) {
+    clickCounter = 0
+  } else {
+    clickCounter++
+  }
+}
+
+var lis = document.querySelectorAll('li')
+for (var i = 0; i < lis.length; i++) {
+  var li = lis[i]
+  li.addEventListener('click', function (event) {
+    // Grab the thing we are clicking on that is attached to event (the target).
+    // It has an object of style and a property of color that we are manually setting
+    // to be the color blue. This ends up in the style property on the element itself.
+    event.target.style.color = 'blue'
+    event.target.className += ' selected'
+
+    var selectedItems = document.querySelectorAll('.selected')
+
+    var myItemsAsAString = ''
+
+    for (var j = 0; j < selectedItems.length; j++) {
+      myItemsAsAString += selectedItems[j].textContent.trim() + ' '
+    }
+
+    document.querySelector('.alert.alert-info span').textContent = myItemsAsAString
+  })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Change the text of the title
 // - Choose Your Magical Ingredients
 title.textContent = 'Choose Your Magical Ingredients'
